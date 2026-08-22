@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO：联盟站点核心靠搜索流量，标题/描述务必含细分品类关键词 -->
+  <title>优选清单 · 2026 最值得买的 [你的细分品类] 推荐与评测</title>
+  <meta name="description" content="我们基于真实使用体验，为你筛选 [你的细分品类] 中最值得购买的产品，附详细对比与购买建议。内含联盟推广链接。" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- 联盟合规披露条：几乎所有国家/平台（含 Amazon Associates、FTC）都要求明确披露 -->
+  <div class="disclosure" id="disclosure">
+    <div class="container disclosure-inner">
+      <p>
+        <strong>透明声明：</strong>本站点包含联盟推广链接。若您通过我们的链接完成购买，我们可能获得一笔佣金，
+        <b>这不会增加您的任何费用</b>，也独立于我们的评测结论。我们只推荐真实使用过或充分调研过的产品。
+      </p>
+      <button class="disclosure-close" id="disclosureClose" aria-label="关闭声明">×</button>
+    </div>
+  </div>
+
+  <!-- 顶部导航 -->
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="优选清单首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">优选清单 <span class="brand-sub">PickList</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="主导航">
+        <a href="#picks">精选好物</a>
+        <a href="#compare">横评对比</a>
+        <a href="#categories">全部分类</a>
+        <a href="#reviews">最新评测</a>
+        <a href="#about">关于我们</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="#picks">查看榜单</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="badge">🎯 独立、真实、不收钱改结论</span>
+          <h1>2026 年最值得买的<br />[你的细分品类]</h1>
+          <p class="lead">
+            我们花了数百小时实测与比对，把市面上值得入手的产品浓缩成一份清单。
+            少踩坑、少花冤枉钱，直接看结论。
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="#picks">查看年度精选</a>
+            <a class="btn btn-outline btn-lg" href="#compare">看横评对比</a>
+          </div>
+          <p class="hero-note">已评测 120+ 款产品 · 每月更新 · 免费阅读</p>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="rank-card">
+            <span class="rank-badge">年度第一</span>
+            <div class="rank-thumb"></div>
+            <div class="rank-body">
+              <h3>[示例产品 A]</h3>
+              <div class="stars" aria-label="评分 4.8 分">★★★★<span class="half">★</span></div>
+              <p class="rank-price">¥XXX</p>
+              <span class="rank-tag">综合最佳</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 精选好物 -->
+    <section class="section" id="picks">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">编辑精选</span>
+          <h2>我们最推荐的 3 款</h2>
+          <p>按「综合体验 / 性价比 / 特定场景」分别选出，点按钮直达官方/合作购买页。</p>
+        </div>
+
+        <div class="grid-3 picks">
+          <article class="pick-card reveal">
+            <div class="pick-thumb"><span class="pick-emoji" aria-hidden="true">🥇</span></div>
+            <div class="pick-body">
+              <span class="pick-cat">综合最佳</span>
+              <h3>[示例产品 A]</h3>
+              <div class="stars" aria-label="评分 4.8 分">★★★★<span class="half">★</span></div>
+              <p class="pick-price">¥XXX <del>¥YYY</del></p>
+              <p class="pick-desc">一句话说明它为什么排第一，突出 1–2 个差异化卖点。</p>
+              <!-- 联盟链接占位：替换为你的推广链接，建议带 subID 便于统计转化 -->
+              <a class="btn btn-primary btn-block" href="https://example.com/affiliate?product=A&subid=home_top1" rel="sponsored nofollow" target="_blank">查看评测并购买</a>
+            </div>
+          </article>
+
+          <article class="pick-card reveal">
+            <div class="pick-thumb"><span class="pick-emoji" aria-hidden="true">💰</span></div>
+            <div class="pick-body">
+              <span class="pick-cat">性价比之王</span>
+              <h3>[示例产品 B]</h3>
+              <div class="stars" aria-label="评分 4.6 分">★★★★<span class="half">★</span></div>
+              <p class="pick-price">¥XXX <del>¥YYY</del></p>
+              <p class="pick-desc">预算有限时的首选，核心体验不缩水，适合入门用户。</p>
+              <a class="btn btn-outline btn-block" href="https://example.com/affiliate?product=B&subid=home_top2" rel="sponsored nofollow" target="_blank">查看评测并购买</a>
+            </div>
+          </article>
+
+          <article class="pick-card reveal">
+            <div class="pick-thumb"><span class="pick-emoji" aria-hidden="true">⚡</span></div>
+            <div class="pick-body">
+              <span class="pick-cat">进阶之选</span>
+              <h3>[示例产品 C]</h3>
+              <div class="stars" aria-label="评分 4.7 分">★★★★<span class="half">★</span></div>
+              <p class="pick-price">¥XXX <del>¥YYY</del></p>
+              <p class="pick-desc">预算充足、追求极致体验玩家的升级方向，附详细横向评测。</p>
+              <a class="btn btn-outline btn-block" href="https://example.com/affiliate?product=C&subid=home_top3" rel="sponsored nofollow" target="_blank">查看评测并购买</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 横评对比 -->
+    <section class="section section-alt" id="compare">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">横评对比</span>
+          <h2>三款热门产品，一张表看懂</h2>
+          <p>对比维度可按你的品类自定义，帮助用户快速决策。</p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>维度</th>
+                <th>[产品 A]</th>
+                <th>[产品 B]</th>
+                <th>[产品 C]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>价格</td><td>¥XXX</td><td>¥XXX</td><td>¥XXX</td></tr>
+              <tr><td>综合评分</td><td>4.8 ★</td><td>4.6 ★</td><td>4.7 ★</td></tr>
+              <tr><td>核心卖点</td><td>体验均衡</td><td>价格友好</td><td>性能顶配</td></tr>
+              <tr><td>适合人群</td><td>大多数用户</td><td>预算敏感</td><td>进阶玩家</td></tr>
+              <tr>
+                <td>购买</td>
+                <td><a class="btn btn-primary btn-sm" href="https://example.com/affiliate?product=A&subid=compare" rel="sponsored nofollow" target="_blank">前往</a></td>
+                <td><a class="btn btn-outline btn-sm" href="https://example.com/affiliate?product=B&subid=compare" rel="sponsored nofollow" target="_blank">前往</a></td>
+                <td><a class="btn btn-outline btn-sm" href="https://example.com/affiliate?product=C&subid=compare" rel="sponsored nofollow" target="_blank">前往</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 品类入口 -->
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">按需浏览</span>
+          <h2>按品类找好物</h2>
+        </div>
+        <div class="grid-3 cats">
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">🎧</span><h3>耳机音响</h3><p>12 篇评测</p></a>
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">⌨️</span><h3>键盘鼠标</h3><p>9 篇评测</p></a>
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">🖥️</span><h3>显示器</h3><p>7 篇评测</p></a>
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">📷</span><h3>摄影器材</h3><p>10 篇评测</p></a>
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">🏃</span><h3>运动户外</h3><p>8 篇评测</p></a>
+          <a class="cat-card reveal" href="#"><span class="cat-emoji" aria-hidden="true">🍳</span><h3>厨房好物</h3><p>6 篇评测</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最新评测 -->
+    <section class="section section-alt" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">最新评测</span>
+          <h2>近期更新的深度内容</h2>
+        </div>
+        <div class="grid-3 posts">
+          <article class="post-card reveal">
+            <div class="post-thumb"></div>
+            <div class="post-body">
+              <span class="post-cat">选购指南</span>
+              <h3>[2026 年] 入门到进阶：如何挑选 [品类] 不踩坑</h3>
+              <p>从预算、核心参数到使用场景，一篇文章讲清选购逻辑。</p>
+              <a class="post-more" href="#">阅读全文 →</a>
+            </div>
+          </article>
+          <article class="post-card reveal">
+            <div class="post-thumb"></div>
+            <div class="post-body">
+              <span class="post-cat">单品评测</span>
+              <h3>[产品 A] 深度体验：它凭什么排第一？</h3>
+              <p>两周真实使用，优缺点、适用人群一次说清。</p>
+              <a class="post-more" href="#">阅读全文 →</a>
+            </div>
+          </article>
+          <article class="post-card reveal">
+            <div class="post-thumb"></div>
+            <div class="post-body">
+              <span class="post-cat">横评</span>
+              <h3>同价位 5 款 [品类] 盲测对比</h3>
+              <p>不看品牌看体验，告诉你钱该花在哪。</p>
+              <a class="post-more" href="#">阅读全文 →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 订阅 -->
+    <section class="cta" id="subscribe">
+      <div class="container cta-inner reveal">
+        <h2>不想错过新评测？</h2>
+        <p>订阅后，我们每周精选一期「值得买清单」直接发到你的邮箱。</p>
+        <form class="sub-form" id="subForm" novalidate>
+          <input type="email" id="subEmail" placeholder="you@example.com" autocomplete="email" aria-label="邮箱地址" required />
+          <button class="btn btn-light btn-lg" type="submit">免费订阅</button>
+          <p class="form-success" id="subSuccess" hidden>✅ 订阅成功，欢迎信已发送（演示）。</p>
+        </form>
+        <p class="cta-fine">我们尊重隐私，随时一键退订，绝不分享你的邮箱。</p>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="section" id="about">
+      <div class="container about reveal">
+        <h2>我们如何做评测</h2>
+        <p>
+          优选清单由一群真实使用者运营。我们只推荐亲自用过或做了充分横向调研的产品，
+          评测结论独立于任何品牌合作。联盟佣金是我们维持站点运转的方式之一，
+          但<strong>它不会影响我们对产品的客观评价</strong>。如果你发现某条内容有问题，欢迎随时联系我们纠错。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚：含联盟免责声明 -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">优选清单 <span class="brand-sub">PickList</span></span>
+        </a>
+        <p>独立产品评测与购买建议，帮你少花冤枉钱。</p>
+      </div>
+      <div class="footer-col">
+        <h4>内容</h4>
+        <a href="#picks">精选好物</a>
+        <a href="#compare">横评对比</a>
+        <a href="#reviews">最新评测</a>
+      </div>
+      <div class="footer-col">
+        <h4>站点</h4>
+        <a href="#about">关于我们</a>
+        <a href="#">联系纠错</a>
+        <a href="#">隐私政策</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">RSS 订阅</a>
+        <a href="#subscribe">邮件订阅</a>
+      </div>
+    </div>
+
+    <div class="container footer-disclaimer">
+      <p>
+        <strong>联盟关系与免责声明：</strong>本网站（优选清单）参与若干联盟营销计划，
+        包括但不限于各大电商的联盟项目。当您通过本站链接购买商品时，我们可能获得佣金，
+        这不会让您支付更高价格。产品链接均标注 <code>rel="sponsored nofollow"</code>。
+        本站内容仅供参考资料之用，不构成购买或投资建议；价格、参数以实际销售页面为准。
+        商标与版权归各自权利人所有。
+      </p>
+      <p class="copyright">© 2026 优选清单 PickList. 保留所有权利。</p>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

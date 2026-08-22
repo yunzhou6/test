@@ -1,0 +1,34 @@
+# Netlify 部署配置
+# 文档：https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # 纯静态站点，无需构建命令
+  command = ""
+  # 发布目录（站点根目录）
+  publish = "."
+
+# 安全响应头（提升评分与安全）
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# 单页应用路由回退（如后续扩展为多页/路由，可保留）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# 缓存静态资源
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
