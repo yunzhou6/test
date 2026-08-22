@@ -1,6 +1,6 @@
 # 部署上线指南 · Netlify
 
-本指南帮助你把 `云启 CloudStart` 落地页（纯静态：HTML/CSS/JS）部署到 Netlify 并正式上线。
+本指南帮助你把本仓库里的静态站点（`landing/` 企业落地页、`affiliate/` 联盟营销主页，均为纯 HTML/CSS/JS）部署到 Netlify 并正式上线。
 全程免费方案即可完成，预计耗时 5–10 分钟。
 
 ---
@@ -9,7 +9,7 @@
 
 适合只想快速上线、不打算用 Git 管理的场景。
 
-1. 把以下文件放在同一文件夹：`index.html`、`styles.css`、`script.js`、`netlify.toml`
+1. 把你要上线的那个文件夹（如 `landing/` 或 `affiliate/`）整体拖入，内含 `index.html`、`styles.css`、`script.js`，企业版还含 `netlify.toml`
 2. 打开 https://app.netlify.com/drop
 3. 将整个文件夹拖入页面虚线框
 4. 等待几秒，Netlify 自动分配一个 `xxx.netlify.app` 域名，即已上线 ✅
@@ -21,14 +21,20 @@
 
 ## 方式二：Git 持续部署（推荐，自动更新）
 
-适合长期维护，后续每次 `git push` 自动重新发布。
+适合长期维护，后续每次 `git push` 自动重新发布。仓库已在本地初始化并提交，结构如下：
 
-### 1. 初始化 Git 仓库（若尚未初始化）
+```
+DEPLOY.md
+landing/          # 企业落地页（原「云启 CloudStart」）
+  index.html  styles.css  script.js  netlify.toml
+affiliate/        # 联盟营销主页
+  index.html  styles.css  script.js
+```
+
+### 1. 以后改完文件，只需提交
 ```bash
-cd 项目目录
-git init
-git add index.html styles.css script.js netlify.toml
-git commit -m "feat: 初始落地页"
+git add -A
+git commit -m "描述你的改动"
 ```
 
 ### 2. 推送到 GitHub / GitLab / Gitee
@@ -37,17 +43,24 @@ git remote add origin <你的仓库地址>
 git branch -M main
 git push -u origin main
 ```
+> 还没有远程仓库？去 github.com 新建一个**空仓库**（不要勾选 README/许可证），复制它的 HTTPS 或 SSH 地址填到 `<你的仓库地址>`。
 
-### 3. 在 Netlify 关联仓库
+### 3. 在 Netlify 关联仓库（开启持续部署）
 1. 登录 https://app.netlify.com
 2. 点击 **Add new site → Import an existing project**
-3. 选择你刚推送的代码平台并授权
-4. 配置：
-   - Build command：`（留空）`
-   - Publish directory：`/`（根目录）
-5. 点击 **Deploy**，等待完成即上线
+3. 选择你的代码平台并授权，选中刚推送的仓库
+4. 配置（关键两步）：
+   - **Build command**：`（留空，纯静态无需构建）`
+   - **Publish directory**：选你要上线的那个站点目录
+     - 上线企业落地页 → 填 `landing`
+     - 上线联盟营销主页 → 填 `affiliate`
+5. 点击 **Deploy**
 
-此后修改文件 → `git push` → Netlify 自动重新部署。
+✅ 完成！之后每次 `git push`，Netlify 会自动重新部署，生产环境实时更新。
+
+### 4. 想两套站点都上线？
+在 Netlify 再 **Add new site → Import an existing project** 一次，选同一个仓库，
+Publish directory 填另一个文件夹即可。两个站点共享一个 Git 仓库，各自独立部署、互不影响。
 
 ---
 
@@ -62,8 +75,9 @@ npm install -g netlify-cli
 # 登录
 netlify login
 
-# 部署（交互式，按提示选择站点）
-netlify deploy --prod --dir .
+# 部署（交互式，按提示选择站点；下方 --dir 改为你要发布的文件夹）
+netlify deploy --prod --dir landing     # 企业落地页
+# netlify deploy --prod --dir affiliate  # 联盟营销主页
 ```
 
 本地预览生产构建：
@@ -92,7 +106,7 @@ netlify dev        # 本地启动，默认 http://localhost:8888
 - [ ] 表单校验生效（空字段、错误邮箱会提示）
 - [ ] 滚动揭示与数字动画正常
 - [ ] 所有资源使用相对路径（`./styles.css`、`./script.js`）
-- [ ] `netlify.toml` 已随站点一起上传
+- [ ] `netlify.toml`（企业版在 `landing/`）已随站点一起上传
 - [ ] 上线后访问分配的 `*.netlify.app` 域名确认可打开
 - [ ] （可选）自定义域名 + HTTPS 已配置
 
