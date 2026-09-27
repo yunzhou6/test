@@ -164,12 +164,42 @@
 
       if (!valid) return;
 
-      // 真实项目可在此通过 fetch 提交到后端 API；此处仅做前端演示
-      if (success) {
+      // Netlify Forms：线上自动收集提交；本地预览保持演示模式。
+      const isNetlifyHost = /(^|\.)netlify\.app$/.test(window.location.hostname);
+
+      function showSuccess(message) {
+        if (!success) return;
+        success.textContent = message;
         success.hidden = false;
         success.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-      form.reset();
+
+      if (!isNetlifyHost) {
+        showSuccess("✅ 表单校验通过（本地预览，未发送数据）。");
+        form.reset();
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+      showSuccess("⏳ 正在提交，请稍候…");
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Form submission failed");
+          showSuccess("✅ 提交成功！我们会尽快与您联系。");
+          form.reset();
+        })
+        .catch(function () {
+          showSuccess("⚠️ 暂时提交失败，请稍后重试或直接发邮件联系我们。");
+        })
+        .finally(function () {
+          if (submitButton) submitButton.disabled = false;
+        });
     });
 
     // 输入时实时清除错误

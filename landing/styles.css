@@ -430,3 +430,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .mock { transition: none; }
 }
+
+/* Netlify Forms honeypot field */
+.hidden { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }

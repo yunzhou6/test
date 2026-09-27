@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="云启 CloudStart —— 企业级云协作平台，让团队在一个空间里完成沟通、项目与数据协作。免费试用，5 分钟上线。" />
   <meta name="theme-color" content="#4f46e5" />
+  <link rel="canonical" href="https://stirring-elf-614467.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="云启 CloudStart" />
+  <meta property="og:title" content="云启 CloudStart · 企业级云协作平台" />
+  <meta property="og:description" content="把沟通、项目、文档与数据汇聚到同一个工作台，让团队协作快人一步。" />
+  <meta property="og:url" content="https://stirring-elf-614467.netlify.app/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="云启 CloudStart · 企业级云协作平台" />
+  <meta name="twitter:description" content="把沟通、项目、文档与数据汇聚到同一个工作台，让团队协作快人一步。" />
   <title>云启 CloudStart · 企业级云协作平台</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="./styles.css" />
@@ -285,7 +295,9 @@
           </ul>
         </div>
 
-        <form class="contact-form reveal" id="contactForm" novalidate>
+        <form class="contact-form reveal" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden"><label>请勿填写：<input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
           <div class="field">
             <label for="name">姓名 <span class="req">*</span></label>
             <input type="text" id="name" name="name" autocomplete="name" placeholder="请输入您的姓名" required />

@@ -83,13 +83,42 @@
         return;
       }
 
-      // 真实项目：通过 fetch 发送到你的邮件服务（Mailchimp / 自建 API 等）
-      // 示例：fetch("/api/subscribe", { method: "POST", body: JSON.stringify({ email: value }) })
-      if (subSuccess) {
+      // Netlify Forms：线上自动收集订阅；本地预览保持演示模式。
+      const isNetlifyHost = /(^|\.)netlify\.app$/.test(window.location.hostname);
+
+      function showSuccess(message) {
+        if (!subSuccess) return;
+        subSuccess.textContent = message;
         subSuccess.hidden = false;
         subSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-      subForm.reset();
+
+      if (!isNetlifyHost) {
+        showSuccess("✅ 邮箱格式正确（本地预览，未提交数据）。");
+        subForm.reset();
+        return;
+      }
+
+      const submitButton = subForm.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+      showSuccess("⏳ 正在提交，请稍候…");
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(subForm)).toString()
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Subscription failed");
+          showSuccess("✅ 订阅成功，我们会把新评测发到你的邮箱。");
+          subForm.reset();
+        })
+        .catch(function () {
+          showSuccess("⚠️ 暂时订阅失败，请稍后重试。");
+        })
+        .finally(function () {
+          if (submitButton) submitButton.disabled = false;
+        });
     });
   }
 })();

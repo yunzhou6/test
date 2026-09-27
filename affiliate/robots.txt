@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yunzhou6-affiliate.netlify.app/sitemap.xml
