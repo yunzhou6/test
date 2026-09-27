@@ -5,3 +5,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# 本地部署压缩包
+affiliate-dist.zip

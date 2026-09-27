@@ -25,10 +25,12 @@
 
 ```
 DEPLOY.md
+HANDOVER.md
+FIX-affiliate-404.md
 landing/          # 企业落地页（原「云启 CloudStart」）
-  index.html  styles.css  script.js  netlify.toml
+  index.html  styles.css  script.js  netlify.toml  robots.txt  sitemap.xml
 affiliate/        # 联盟营销主页
-  index.html  styles.css  script.js
+  index.html  styles.css  script.js  netlify.toml  robots.txt  sitemap.xml
 ```
 
 ### 1. 以后改完文件，只需提交

@@ -1,5 +1,10 @@
 # 修复操作单：联盟营销主页 404 问题
 
+> **✅ 执行状态（2026-09-27）**：已完成重建并验证。
+> 新站点：`https://yunzhou6-affiliate.netlify.app`（HTTP 200）
+> GitHub：`main` 分支；Publish directory：`affiliate`；Build command：留空。
+> 本文保留为操作记录与后续排障参考。
+
 > **背景**：`neon-brioche-dfbf3f` 和 `heroic-halva-2007ba` 两个站点返回 404。
 > **诊断结论**：这两个站点**已被从 Netlify 删除**（DNS 仍残留指向 Netlify，但站点已不存在）。
 > 因此**无法"修"现有站点，只能重建**。好消息是代码完全没问题，5 分钟可完成。
@@ -95,7 +100,7 @@ $env:HTTP_PROXY  = "http://127.0.0.1:10808"
 
 **方式一（页面）**：部署完成后 Netlify 会显示一个网址，形如
 ```
-https://<新随机名>.netlify.app
+https://yunzhou6-affiliate.netlify.app
 ```
 点开应看到**联盟营销主页**（顶部有可关闭的合规披露条、精选好物卡片、对比表）。
 
@@ -131,7 +136,7 @@ curl.exe -s -o NUL -w "HTTP %{http_code}\n" https://你的新域名.netlify.app/
 
 | 站点 | 发布目录 | 建议域名 | 内容 |
 |---|---|---|---|
-| 企业落地页 | `landing` | `yunzhou6-landing.netlify.app` | 云启 CloudStart |
+| 企业落地页 | `landing` | `stirring-elf-614467.netlify.app`（暂未改名） | 云启 CloudStart |
 | 联盟营销主页 | `affiliate` | `yunzhou6-affiliate.netlify.app` | 优选清单 |
 
 两个站点共享同一个 Git 仓库。**以后改完文件只需：**

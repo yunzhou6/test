@@ -19,27 +19,32 @@
 |---|---|
 | 远程仓库 | `https://github.com/yunzhou6/test`（Public） |
 | 默认分支 | `main` |
-| 本地路径 | `C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17` |
-| 最近提交 | `35f29d0` chore: 清理仓库，移除与网站无关的文件 |
-| 提交历史 | `00a75c1` 初始化 → `ca50bb6` 更新文档 → `7d5f2bd` 新增交接文档 → `35f29d0` 清理仓库 |
-| 跟踪文件数 | **10 个**（仅两个站点 + 两份文档 + `.gitignore`） |
+| 本地路径 | `C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites` |
+| 最近提交 | 以 `git log` 为准；2026-09-27 已完成表单、SEO、安全头与站点重建 |
+| 提交历史 | `00a75c1` 初始化 → `ca50bb6` 更新文档 → `244e55a` 运营更新 → 后续持续迭代 |
+| 跟踪文件数 | **16 个**（两个站点 + 三份文档 + `.gitignore`） |
 
 **仓库目录结构**（重要：两个网站共用同一个仓库、不同子目录）：
 
 ```
-test/                     ← Git 仓库根（共 10 个跟踪文件）
+test/                     ← Git 仓库根（共 16 个跟踪文件）
 ├── .gitignore            # 排除非网站内容
 ├── DEPLOY.md             # 部署操作指南（技术细节）
 ├── HANDOVER.md           # 本文件（交接说明）
 ├── landing/              # 【站点 A】企业落地页「云启 CloudStart」
-│   ├── index.html        # 14,750 字节
-│   ├── styles.css        # 15,420 字节
-│   ├── script.js         # 5,903 字节
-│   └── netlify.toml      # 安全响应头 + 缓存规则（仅此站有）
+│   ├── index.html        # 页面结构 + SEO + Netlify Forms
+│   ├── styles.css        # 样式
+│   ├── script.js         # 交互与表单提交
+│   ├── netlify.toml      # 安全响应头 + 缓存规则
+│   ├── robots.txt        # 搜索抓取规则
+│   └── sitemap.xml       # 站点地图
 └── affiliate/            # 【站点 B】联盟营销主页
-    ├── index.html        # 14,349 字节
-    ├── styles.css        # 13,970 字节
-    └── script.js         # 3,359 字节
+    ├── index.html        # 页面结构 + SEO + 合规披露
+    ├── styles.css        # 样式
+    ├── script.js         # 交互与订阅提交
+    ├── netlify.toml      # 安全响应头 + 缓存规则
+    ├── robots.txt        # 搜索抓取规则
+    └── sitemap.xml       # 站点地图
 ```
 
 > **注意**：仓库已于 2026-09-27 做过清理，与网站无关的文件（本机 AI 配置、越南店素材转录等）
@@ -49,21 +54,24 @@ test/                     ← Git 仓库根（共 10 个跟踪文件）
 
 | # | 站点域名 | HTTP 状态 | 发布目录 | 内容 | 判定 |
 |---|---|---|---|---|---|
-| 1 | `stirring-elf-614467.netlify.app` | **200 ✅** | `landing` | 企业落地页 | **正常在线，保留** |
-| 2 | `neon-brioche-dfbf3f.netlify.app` | **404 ❌** | 已删除 | — | ⚠️ 站点已删除 |
-| 3 | `heroic-halva-2007ba.netlify.app` | **404 ❌** | 已删除 | — | ⚠️ 站点已删除 |
+| 1 | `stirring-elf-614467.netlify.app` | **200 ✅** | `landing` | 企业落地页 | **正常在线，自动部署** |
+| 2 | `yunzhou6-affiliate.netlify.app` | **200 ✅** | `affiliate` | 联盟营销主页 | **2026-09-27 已重建上线** |
+| 3 | `neon-brioche-dfbf3f.netlify.app` | 404 | 已删除 | 历史失效域名 | 不再使用 |
+| 4 | `heroic-halva-2007ba.netlify.app` | 404 | 已删除 | 历史失效域名 | 不再使用 |
 
 > **404 根因（已确诊）**：站点 2、3 **已被从 Netlify 账号中删除**。
 > 判定依据：域名 DNS 仍解析到 Netlify 服务器（52.74.6.109 等），但返回的是
 > Netlify 的 **"site not found"** 默认页 —— 若站点存在只是未部署，应返回 200 + 空白页。
 > 建站时这两个站的 Publish directory 也误填为 `landing`（本应 `affiliate`），现已无修复价值。
 >
-> **结论**：**联盟营销主页目前没有任何可访问的线上地址，需重建站点。**
-> **完整修复步骤见 [`FIX-affiliate-404.md`](./FIX-affiliate-404.md)** —— 含诊断依据、逐步操作单、验证清单与排障表。
+> **结论（已执行）**：旧站点无法修复，已于 2026-09-27 重建为
+> **`https://yunzhou6-affiliate.netlify.app`**，Publish directory = `affiliate`，
+> 当前 HTTP 200，Git 持续部署已关联。
 >
-> ✅ **代码侧已确认无问题**：`affiliate/` 三文件本地验证均 HTTP 200，JS 语法通过，
-> 资源全为相对路径，7 处联盟链接带 `rel="sponsored nofollow"`，披露声明存在。
-> `affiliate/netlify.toml` 已补齐（安全响应头 + 缓存）。**只需在 Netlify 重建站点，Publish directory 填 `affiliate`。**
+> ✅ **验证结果**：HTML/CSS/JS/robots/sitemap 均 200；JS 语法通过；资源使用相对路径；
+> 6 处联盟链接均带 `rel="sponsored nofollow noopener"`；披露声明存在；
+> HSTS、`X-Frame-Options`、`X-Content-Type-Options` 等安全响应头已生效。
+> 修复过程与排障记录见 [`FIX-affiliate-404.md`](./FIX-affiliate-404.md)。
 
 ### 1.3 已验证的线上表现（站点 1）
 
@@ -103,7 +111,7 @@ test/                     ← Git 仓库根（共 10 个跟踪文件）
 → 最新评测（3 篇）→ 邮件订阅 → 关于 → 含免责声明的页脚
 
 **关键技术约定**（接手后必须遵守）：
-1. **联盟链接必须带 `rel="sponsored nofollow"`** —— SEO 合规要求，当前有 7 处已标注
+1. **联盟链接必须带 `rel="sponsored nofollow"`** —— SEO 合规要求，当前有 6 处已标注
 2. **链接格式**：`https://example.com/affiliate?...&subid=xxx`，`subid` 用于区分流量来源，便于统计转化
    > ⚠️ 当前是占位链接（`example.com`），**需要替换为真实联盟平台链接**
 3. **顶部披露条不可删除** —— 平台合规要求（Amazon Associates / FTC / 国内电商联盟均要求明示"含推广链接"）
@@ -113,7 +121,7 @@ test/                     ← Git 仓库根（共 10 个跟踪文件）
 - `[你的细分品类]` → 真实品类
 - `[示例产品 A/B/C]` → 真实产品名与价格
 - `example.com/affiliate?...` → 真实联盟链接
-- `script.js` 中的订阅表单 `fetch` 注释位 → 真实订阅后端（Mailchimp / 自建 API）
+- 订阅表单已接入 Netlify Forms；如需邮件自动化，后续再连接 Mailchimp 等外部服务
 
 ---
 
@@ -122,7 +130,7 @@ test/                     ← Git 仓库根（共 10 个跟踪文件）
 ### 3.1 环境要求
 
 - Git（本机已装）
-- 项目目录：`C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17`
+- 项目目录：`C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites`
 - **⚠️ 本机代理环境变量坑**：`HTTPS_PROXY` 若带尾部斜杠（`http://127.0.0.1:10808/`）会导致
   git push 报 `URL rejected: Port number was not a decimal number between 0 and 65535`。
   **修复**（PowerShell）：
@@ -136,7 +144,7 @@ test/                     ← Git 仓库根（共 10 个跟踪文件）
 
 ```powershell
 # 1. 进入项目目录（⚠️ 必须先 cd，否则报 "not a git repository"）
-cd "C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17"
+cd "C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites"
 
 # 2. 查看改了什么（可选，建议做）
 git status
@@ -210,7 +218,7 @@ git push
 ### 5.1 日常内容更新（最高频）
 
 ```powershell
-cd "C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17"
+cd "C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites"
 # 编辑 landing/index.html 或 affiliate/index.html
 git add -A && git commit -m "更新：xxx" && git push
 ```
@@ -239,7 +247,7 @@ git add -A && git commit -m "更新：xxx" && git push
 
 | 现象 | 根因 | 解决 |
 |---|---|---|
-| `fatal: not a git repository` | 终端没在项目目录 | 先 `cd "C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17"` |
+| `fatal: not a git repository` | 终端没在项目目录 | 先 `cd "C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites"` |
 | `URL rejected: Port number was not a decimal number between 0 and 65535` | 代理环境变量 `HTTPS_PROXY` 尾部带 `/` | 改为 `http://127.0.0.1:10808`（去斜杠） |
 | `could not read Username for 'https://github.com'` | 无凭据 / 无法弹出浏览器授权 | 用 PAT 临时嵌入 URL 推送（见 3.3） |
 | `Project has not yet been deployed` | Import 后未自动触发部署 | 改好 Publish directory → Deploys → Trigger deploy → Deploy site |
@@ -254,24 +262,22 @@ git add -A && git commit -m "更新：xxx" && git push
 
 ### P0 — 必须处理
 
-- [ ] **修复联盟主页线上缺失**：站点 `neon-brioche-dfbf3f` 与 `heroic-halva-2007ba` 均 404
-  - **诊断**：这两个站点已被删除（DNS 残留但返回 "site not found"），无法修复，**只能重建**
-  - **做法**：Netlify → Add new site → Import an existing project → 选 `yunzhou6/test` →
-    **Publish directory 填 `affiliate`** → Deploy
-  - **详细步骤**：见 [`FIX-affiliate-404.md`](./FIX-affiliate-404.md)
-  - ✅ 代码侧已验证无问题，仅需 Netlify 重建站点
-- [ ] **联盟站内容替换**：把 `[你的细分品类]` / `[示例产品 A/B/C]` / `example.com` 占位链接
-      换成真实品类、产品与联盟平台链接（**需 boss 提供**）
+- [x] **修复联盟主页线上缺失** — 已完成（2026-09-27）
+  - 新站点：`https://yunzhou6-affiliate.netlify.app`
+  - Publish directory：`affiliate`；Branch：`main`；Build command：留空
+  - 已验证 HTTP 200、资源、SEO、安全头与 Git 自动部署
+- [ ] **联盟站内容替换**：把 `[示例产品 A/B/C]`、价格与 `example.com` 占位链接
+      换成真实产品与联盟平台链接（**需 boss 提供**）
 
 ### P1 — 建议处理
 
-- [ ] **站点重命名**：把随机域名改成可读名称（Site configuration → Change site name），
-      建议 `yunzhou6-landing` / `yunzhou6-affiliate`
+- [x] **联盟站命名** — 已完成：`yunzhou6-affiliate.netlify.app`
+- [ ] **企业站重命名**：可将 `stirring-elf-614467` 改为 `yunzhou6-landing`；
+      改名后必须同步更新 canonical、robots 与 sitemap
 - [x] **补 `affiliate/netlify.toml`** — 已完成（2026-09-27）：含安全响应头与缓存规则
-- [ ] **订阅表单接真实后端**：`affiliate/script.js` 中的 `fetch` 注释位接 Mailchimp 或自建 API
-- [ ] **联系表单接真实后端**：`landing/` 的联系表单目前仅前端校验，未真正发送
-      （可用 Netlify Forms / Formspree / 自建 API）
-- [ ] **SEO 完善**：补 `<link rel="canonical">`、Open Graph 标签、`sitemap.xml`、`robots.txt`
+- [x] **订阅表单接真实后端** — 已接入 Netlify Forms（含蜜罐防垃圾）
+- [x] **联系表单接真实后端** — 已接入 Netlify Forms（含蜜罐防垃圾）
+- [x] **SEO 完善** — 已补 canonical、Open Graph、Twitter Card、`sitemap.xml`、`robots.txt`
 
 ### P2 — 可选优化
 
@@ -307,11 +313,12 @@ git add -A && git commit -m "更新：xxx" && git push
 
 ```
 仓库：      https://github.com/yunzhou6/test
-线上站点：  https://stirring-elf-614467.netlify.app   （企业落地页，正常）
-本地路径：  C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17
+企业落地页：https://stirring-elf-614467.netlify.app
+联盟主页：  https://yunzhou6-affiliate.netlify.app
+本地路径：  C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites
 
 更新三步：
-  cd "C:\Users\Administrator\WorkBuddy\2026-08-22-13-03-17"
+  cd "C:\Users\Administrator\Documents\ChatGPT\healthydogpick\static-sites"
   git add -A && git commit -m "说明" && git push
   → 等 1–2 分钟，Netlify 自动部署
 
