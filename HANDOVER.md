@@ -29,8 +29,11 @@
 ```
 test/                     ← Git 仓库根（共 16 个跟踪文件）
 ├── .gitignore            # 排除非网站内容
+├── README.md             # 仓库总览与快速上手
 ├── DEPLOY.md             # 部署操作指南（技术细节）
 ├── HANDOVER.md           # 本文件（交接说明）
+├── scripts/
+│   └── check-sites.ps1   # 线上健康巡检脚本
 ├── landing/              # 【站点 A】企业落地页「云启 CloudStart」
 │   ├── index.html        # 页面结构 + SEO + Netlify Forms
 │   ├── styles.css        # 样式
@@ -226,10 +229,22 @@ git add -A && git commit -m "更新：xxx" && git push
 
 ### 5.2 每次更新后的必查项
 
+先跑一键巡检脚本，再人工抽查：
+
+```powershell
+pwsh -NoProfile -File .\scripts\check-sites.ps1
+```
+
+脚本会验证两个站点的首页 HTTP 200、标题、canonical、HSTS，
+以及 `robots.txt` / `sitemap.xml` 可访问性，全部通过退出码为 0。
+
+人工抽查：
+
 1. 访问线上地址确认页面正常（浏览器无痕模式 + `Ctrl+Shift+R` 强刷清缓存）
 2. 检查控制台（F12）无报错
 3. 检查移动端窄屏显示（汉堡菜单可展开）
 4. 联盟站额外检查：联盟链接是否可点击、`rel="sponsored nofollow"` 是否保留
+5. 表单入口抽查：企业站联系表单、联盟站订阅表单可正常校验与提交
 
 ### 5.3 更新前自检清单
 
