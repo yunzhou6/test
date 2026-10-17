@@ -54,6 +54,10 @@ pwsh -NoProfile -File .\scripts\check-sites.ps1
 脚本会检查两个站点的首页 HTTP 状态、标题、canonical、HSTS 响应头，
 以及 `robots.txt`、`sitemap.xml` 是否可访问；全部通过时退出码为 0。
 
+同一脚本也已接入 GitHub Actions（`.github/workflows/site-health.yml`）：
+每天北京时间 09:00 自动巡检一次，`main` 分支每次推送后也会验证，
+也可以在仓库 **Actions** 页面手动触发。
+
 ## 部署配置
 
 | 站点 | Branch | Build command | Publish directory |

@@ -32,6 +32,9 @@ test/                     ← Git 仓库根（共 16 个跟踪文件）
 ├── README.md             # 仓库总览与快速上手
 ├── DEPLOY.md             # 部署操作指南（技术细节）
 ├── HANDOVER.md           # 本文件（交接说明）
+├── .github/
+│   └── workflows/
+│       └── site-health.yml  # 每日自动巡检
 ├── scripts/
 │   └── check-sites.ps1   # 线上健康巡检脚本
 ├── landing/              # 【站点 A】企业落地页「云启 CloudStart」
@@ -237,6 +240,9 @@ pwsh -NoProfile -File .\scripts\check-sites.ps1
 
 脚本会验证两个站点的首页 HTTP 200、标题、canonical、HSTS，
 以及 `robots.txt` / `sitemap.xml` 可访问性，全部通过退出码为 0。
+
+该脚本同时接入 GitHub Actions：每天北京时间 09:00 自动巡检，
+`main` 每次推送后自动验证，也可在仓库 **Actions** 页手动运行。
 
 人工抽查：
 

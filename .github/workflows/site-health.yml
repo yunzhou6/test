@@ -1,0 +1,26 @@
+name: 站点健康巡检
+
+on:
+  # 每天北京时间 09:00（UTC 01:00）自动巡检
+  schedule:
+    - cron: "0 1 * * *"
+  # 支持在 Actions 页面手动触发
+  workflow_dispatch:
+  # 每次推送到 main 后也验证一次
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check-sites:
+    name: 检查两个 Netlify 站点
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 运行线上健康检查
+        shell: pwsh
+        run: ./scripts/check-sites.ps1
